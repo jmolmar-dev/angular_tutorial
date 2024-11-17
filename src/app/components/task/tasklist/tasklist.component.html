@@ -1,1 +1,60 @@
-<p>tasklist works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Prioridad</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Fecha Expiracion</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let task of taskList">
+                        <ng-container *ngIf="!task.isDelete">
+                            <th scope="row">{{task.id}}</th>
+                            <td>{{task.name}}</td>
+                            <td>{{task.description}}</td>
+                            <td [ngClass]="{'table-danger':task.priority == 'H','table-warning':task.priority == 'M','table-success':task.priority == 'L'}" 
+                            [ngSwitch]="task.priority">
+                                <span *ngSwitchCase="'H'">Alta</span>
+                                <span *ngSwitchCase="'M'">Media</span>
+                                <span *ngSwitchCase="'L'">Baja</span>
+                                @if (task.priority == 'H' && (task.status == 'IP' || task.status == 'P')) {
+                                    <i class="bi bi-arrow-down-circle-fill "></i>
+                                }
+                                @if (task.priority == 'L' && (task.status == 'IP' || task.status == 'P')) {
+                                    <i class="bi bi-arrow-up-circle-fill"></i>
+                                }
+                                @if (task.priority == 'M' && (task.status == 'IP' || task.status == 'P')) {
+                                    <i class="bi bi-arrow-up-circle-fill"></i><i class="bi bi-arrow-down-circle-fill"></i>
+                                }
+                            </td>
+                            <td [ngClass]="{'table-danger':task.status == 'P','table-warning':task.status == 'IP','table-success':task.status == 'C'}" 
+                            [ngSwitch]="task.status">
+                                <span *ngSwitchCase="'IP'">En Proceso</span>
+                                <span *ngSwitchCase="'P'">Pendiente</span>
+                                <span *ngSwitchCase="'C'">Realizado</span>
+                                @if (task.status == 'P') {
+                                    <i class="bi bi-play-fill"></i>  
+                                }
+                                @if (task.status == 'IP') {
+                                    <i class="bi bi-check-lg"></i>
+                                }
+                                @if (task.status == 'C') {
+                                    <i class="bi bi-arrow-return-right"></i>
+                                }
+                            </td>
+                            <td>{{task.expirationDate}}</td>
+                            <td><i class="bi bi-pencil-square"></i><i class="bi bi-trash"></i></td>
+                        </ng-container>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
