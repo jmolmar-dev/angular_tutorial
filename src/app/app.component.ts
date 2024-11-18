@@ -12,5 +12,5 @@ import { TasklistComponent } from "./components/task/tasklist/tasklist.component
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  nombre = 'Juan';
+  nombre = 'Juan984';
 }
