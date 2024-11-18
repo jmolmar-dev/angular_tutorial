@@ -7,7 +7,7 @@ import { TasklistComponent } from "./components/task/tasklist/tasklist.component
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [NavbarComponent, FooterComponent, TasklistComponent],
+  imports: [RouterOutlet,NavbarComponent, FooterComponent, TasklistComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
