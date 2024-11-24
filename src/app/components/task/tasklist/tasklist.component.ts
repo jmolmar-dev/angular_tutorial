@@ -1,5 +1,5 @@
 import { Component , OnInit} from '@angular/core';
-import {Task, TaskPriority, TaskStatus} from '../../../../models/task.model';
+import {Task, TaskPriority,TaskStatus} from '../../../../models/task.model';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -27,5 +27,40 @@ export class TasklistComponent implements OnInit {
           new Task (9, "Configuracion de las notificaciones", "Realizacion del Despliegue de la Aplicacion", TaskPriority.MEDIUM, TaskStatus.PENDING, new Date ("2024-11-10"), new Date ("2024-11-30"),false),
           new Task (10, "Despliegue en Produccion", "Realizacion del despliegue de la aplicacion", TaskPriority.HIGH, TaskStatus.COMPLETED, new Date ("2024-09-23"), new Date ("2024-11-17"),true)
         ];
+        
       }
+
+      deleteTask (task:Task){
+        task.isDelete = true;
+      }
+
+      incrementPriority (task:Task){
+        if (task.priority == TaskPriority.LOW){
+          task.priority = TaskPriority.MEDIUM;
+        }else if (task.priority == TaskPriority.MEDIUM){
+          task.priority = TaskPriority.HIGH;
+        }
+      }
+
+      reducePriority (task:Task){
+        if (task.priority == TaskPriority.HIGH){
+          task.priority = TaskPriority.MEDIUM;
+        }else if (task.priority == TaskPriority.MEDIUM){
+          task.priority = TaskPriority.LOW;
+        }
+      }
+
+      incrementStatus (task:Task){
+        if (task.status == TaskStatus.PENDING){
+          task.status = TaskStatus.IN_PROGRESS;
+        }else if (task.status == TaskStatus.IN_PROGRESS){
+          task.status = TaskStatus.COMPLETED;
+        }
+      }
+
+      editTask(task : Task){
+        console.log("La tarea se esta editando");
+      }
+      
+
 }
