@@ -21,22 +21,22 @@ export class TaskresumeComponent {
 
 
   deleteTask (task:Task){
-    this.evenTaskModify.emit(new TaskEvent ("deleteTask", this.taskInput))
+    this.evenTaskModify.emit(new TaskEvent ("deleteTask", this.taskInput));
   }
 
   incrementPriority (task:Task){
-    this.evenTaskModify.emit(new TaskEvent ("incrementPriority", this.taskInput))
+    this.evenTaskModify.emit(new TaskEvent ("incrementPriority", this.taskInput));
   }
 
   reducePriority (task:Task){
-    return undefined;
+    this.evenTaskModify.emit(new TaskEvent ("reducePriority", this.taskInput));
   }
 
   incrementStatus (task:Task){
-    return undefined;
+    this.evenTaskModify.emit(new TaskEvent("incrementStatus", this.taskInput));
   }
 
   editTask(task : Task){
-    return undefined;
+    this.evenTaskModify.emit(new TaskEvent("editTask", this.taskInput));
   }
 }

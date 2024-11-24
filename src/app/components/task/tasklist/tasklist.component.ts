@@ -68,7 +68,10 @@ export class TasklistComponent implements OnInit {
       modifyTask (taskEvent : TaskEvent){
         switch(taskEvent.action){
           case "deleteTask": this.deleteTask(taskEvent.task); break;
-          
+          case "incrementPriority": this.incrementPriority(taskEvent.task); break;
+          case "reducePriority": this.reducePriority(taskEvent.task); break;
+          case "incrementStatus": this.incrementStatus(taskEvent.task);break;
+          case "editTask": this.editTask(taskEvent.task);break;
         }
       }
 
