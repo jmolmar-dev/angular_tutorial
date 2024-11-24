@@ -1,11 +1,13 @@
 import { Component , OnInit} from '@angular/core';
 import {Task, TaskPriority,TaskStatus} from '../../../../models/task.model';
 import { CommonModule } from '@angular/common';
+import { TaskresumeComponent } from "../taskresume/taskresume.component";
+import { TaskEvent } from '../../../../models/taskevent.model';
 
 @Component({
   selector: 'app-tasklist',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TaskresumeComponent],
   templateUrl: './tasklist.component.html',
   styleUrl: './tasklist.component.css'
 })
@@ -61,6 +63,15 @@ export class TasklistComponent implements OnInit {
       editTask(task : Task){
         console.log("La tarea se esta editando");
       }
+
+
+      modifyTask (taskEvent : TaskEvent){
+        switch(taskEvent.action){
+          case "deleteTask": this.deleteTask(taskEvent.task); break;
+          
+        }
+      }
+
       
 
 }
