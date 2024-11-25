@@ -1,1 +1,29 @@
-<p>taskform works!</p>
+<div class="contatiner">
+    <div class="row">
+        <div class="col-md-12">
+            <form [formGroup]="formTaskEdit" (ngSubmit)="onSubmit()">
+                <div class="form-control">
+                    <label for="exampleFormControlInput1">Nombre: </label>
+                    <input type="text" class="form-control" formControlName="name" id="exampleFormControlInput1">
+                </div>
+                <div class="form-control">
+                    <label for="exampleFormControlTextarea1">Descripcion: </label>
+                    <textarea class="form-control" formControlName="description" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <div class="form-control2">
+                    <label for="exampleFormControl2">Prioridad: </label>
+                    <select class="form-control" id="exampleFormControlTextarea1">
+                        <option value="H">Alta</option>
+                        <option value="M">Media</option>
+                        <option value="B">Baja</option>
+                    </select>
+                </div>
+                <div class="form-control3">
+                    <label for="exampleFormControl3">Fecha: </label>
+                    <input type="datetime-local" class="form-control3" formControlName="expirationDate" id="exampleFormControl3">
+                </div>
+                <button  class="btn btn-primary" type="submit">Guardar Cambios</button>
+            </form>
+        </div>
+    </div>
+</div>
