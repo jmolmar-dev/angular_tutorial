@@ -22,10 +22,10 @@ export class TaskformComponent {
   }
 
   onSubmit() : void {
-    this.formTaskEdit.value;
-    this.formTaskEdit.get("name")?.value;
+    //this.formTaskEdit.value;
+    //this.formTaskEdit.get("name")?.value;
     if (this.formTaskEdit.valid){
-      console.log();
+      console.log(this.formTaskEdit.value);
     } else{
       console.log(`El fornulario tiene errores: ${this.formTaskEdit.get('name')?.errors}`)
     }

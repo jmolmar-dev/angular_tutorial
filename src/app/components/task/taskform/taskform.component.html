@@ -1,28 +1,31 @@
-<div class="contatiner">
+<div class="container">
     <div class="row">
         <div class="col-md-12">
             <form [formGroup]="formTaskEdit" (ngSubmit)="onSubmit()">
-                <div class="form-control">
-                    <label for="exampleFormControlInput1">Nombre: </label>
-                    <input type="text" class="form-control" formControlName="name" id="exampleFormControlInput1">
+                <div class="form-group">
+                    <label for="exampleFormControlInput">Nombre: </label>
+                    <input type="text" class="form-control" formControlName="name" id="exampleFormControlInput">
                 </div>
-                <div class="form-control">
-                    <label for="exampleFormControlTextarea1">Descripcion: </label>
-                    <textarea class="form-control" formControlName="description" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea">Descripcion: </label>
+                    <textarea class="form-control" formControlName="description" id="exampleFormControlTextarea" rows="3"></textarea>
                 </div>
-                <div class="form-control2">
-                    <label for="exampleFormControl2">Prioridad: </label>
-                    <select class="form-control" id="exampleFormControlTextarea1">
+                <div class="form-group">
+                    <label for="exampleFormControlSelect">Prioridad: </label>
+                    <select class="form-control" formControlName="priority" id="exampleFormControlSelect">
                         <option value="H">Alta</option>
                         <option value="M">Media</option>
                         <option value="B">Baja</option>
                     </select>
                 </div>
-                <div class="form-control3">
-                    <label for="exampleFormControl3">Fecha: </label>
-                    <input type="datetime-local" class="form-control3" formControlName="expirationDate" id="exampleFormControl3">
+                <div class="form-group">
+                    <label for="exampleFormControlDate">Fecha: </label>
+                    <input type="datetime-local" class="form-control" formControlName="expirationDate" id="exampleFormControlDate" 
+                    [ngClass]="{'is-invalid' : this.formTaskEdit.get('expirationDate')?.invalid}">
+                    <small class="text-danger" *ngIf="formTaskEdit.get('expirationDate')?.errors?.['required']">Debe de introducir una fecha</small>
+                    
                 </div>
-                <button  class="btn btn-primary" type="submit">Guardar Cambios</button>
+                <button class="btn btn-primary" type="submit">Guardar Cambios</button>
             </form>
         </div>
     </div>
