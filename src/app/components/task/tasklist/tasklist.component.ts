@@ -62,10 +62,12 @@ export class TasklistComponent implements OnInit {
       }
 
       editTask(task : Task){
-        console.log("La tarea se esta editando");
+        this.taskList.push(task);
+        console.log("tarea incluida con exito en la lista");
+        console.log(this.taskList);
       }
 
-
+      
       modifyTask (taskEvent : TaskEvent){
         switch(taskEvent.action){
           case "deleteTask": this.deleteTask(taskEvent.task); break;
@@ -75,6 +77,8 @@ export class TasklistComponent implements OnInit {
           case "editTask": this.editTask(taskEvent.task);break;
         }
       }
+
+      
 
       
 
