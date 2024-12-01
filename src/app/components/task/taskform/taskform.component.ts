@@ -12,7 +12,7 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
   templateUrl: './taskform.component.html',
   styleUrl: './taskform.component.css'
 })
-export class TaskformComponent implements OnChanges{
+export class TaskformComponent implements OnChanges, OnInit{
 
   @Input()
   taskToEdit: Task | null = null; // Tarea a editar (null si estamos añadiendo)
@@ -31,6 +31,13 @@ export class TaskformComponent implements OnChanges{
       'expirationDate': ['', [Validators.required, customDateExpiration()]],
 
     })
+  }
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((params : ParamMap) => {
+        let id = params.get('id');
+        console.log(id);
+    });
   }
 
   onSubmit() {
