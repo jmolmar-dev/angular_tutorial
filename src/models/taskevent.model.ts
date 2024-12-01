@@ -2,10 +2,10 @@ import { Task } from "./task.model";
 
 export class TaskEvent {
     action : string;
-    task : Task;
+    taskId : number;
 
-    constructor (action : string, task : Task){
+    constructor (action : string, taskId : number){
         this.action = action;
-        this.task = task;
+        this.taskId = taskId;
     }
 }

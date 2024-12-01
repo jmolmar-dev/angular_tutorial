@@ -19,12 +19,14 @@
                         rows="3"
                         [ngClass]="{'is-invalid' : this.formTaskEdit.get('description')?.invalid, 'is-valid' : this.formTaskEdit.get('description')?.valid}"></textarea>
                     <div class="invalid-feedback">
-                        <small class="text-danger" *ngIf="this.formTaskEdit.get('description')?.errors?.['maxlength']">La descripción no puede superar los 250 caracteres</small>
+                        <small class="text-danger"
+                            *ngIf="this.formTaskEdit.get('description')?.errors?.['maxlength']">La descripción no puede
+                            superar los 250 caracteres</small>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlSelect">Prioridad: </label>
-                    <select class="form-control" formControlName="priority" id="exampleFormControlSelect" 
+                    <select class="form-control" formControlName="priority" id="exampleFormControlSelect"
                         [ngClass]="{'is-invalid' : this.formTaskEdit.get('priority')?.invalid, 'is-valid' : this.formTaskEdit.get('priority')?.valid}">
                         <option value="H">Alta</option>
                         <option value="M">Media</option>
@@ -32,8 +34,13 @@
                         <option value="O">Otra</option>
                     </select>
                     <div class="invalid-feedback">
-                        <small class="text-danger" *ngIf="this.formTaskEdit.get('priority')?.errors?.['required']">Debe de seleccionar una Prioridad</small>
-                        <small class="text-danger" *ngIf="this.formTaskEdit.get('priority')?.errors?.['invalidPriority']">No has seleccionado una Prioridad Valida</small>
+                        <small class="text-danger" *ngIf="this.formTaskEdit.get('priority')?.errors?.['required']">Debe
+                            de seleccionar una Prioridad</small>
+                        <small class="text-danger"
+                            *ngIf="this.formTaskEdit.get('priority')?.errors?.['invalidPriority'] && !this.formTaskEdit.get('priority')?.errors?.['required']">
+                            No has seleccionado una Prioridad Valida
+                        </small>
+
                     </div>
                 </div>
                 <div class="form-group">
@@ -42,9 +49,16 @@
                         id="exampleFormControlDate"
                         [ngClass]="{'is-invalid' : this.formTaskEdit.get('expirationDate')?.invalid, 'is-valid' : this.formTaskEdit.get('expirationDate')?.valid}">
                     <div class="invalid-feedback">
-                        <small class="text-danger" *ngIf="this.formTaskEdit.get('expirationDate')?.errors?.['required']">Debe de introducir una fecha</small>
-                        <small class="text-danger" *ngIf="this.formTaskEdit.get('expirationDate')?.errors?.['invalidDate']">La fecha introducida no es valida</small>
+                        <small class="text-danger"
+                            *ngIf="this.formTaskEdit.get('expirationDate')?.errors?.['required']">
+                            Debe de introducir una fecha
+                        </small>
+                        <small class="text-danger"
+                            *ngIf="this.formTaskEdit.get('expirationDate')?.errors?.['invalidDate'] && !this.formTaskEdit.get('expirationDate')?.errors?.['required']">
+                            La fecha introducida no es válida
+                        </small>
                     </div>
+
                 </div>
                 <button class="btn btn-primary" type="submit" style="margin-top: 2%;">Guardar Cambios</button>
             </form>

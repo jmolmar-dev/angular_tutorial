@@ -20,10 +20,19 @@ export function customDateExpiration(): ValidatorFn {
 
 export function customPriority() : ValidatorFn {
   return (control: AbstractControl) : ValidationErrors | null => {
-    let valorCampo = control.value;
-    if (valorCampo == 'H' || valorCampo == 'M' || valorCampo == 'L' || valorCampo == ''){
+    const valorCampo = control.value;
+
+    // Si el campo está vacío, no hay error (esto se maneja con 'required')
+    if (valorCampo === '') {
       return null;
     }
-    return{invalidPriority : true}
+
+    // Si el valor es uno de los válidos, no hay error
+    if (valorCampo === 'H' || valorCampo === 'M' || valorCampo === 'L' || valorCampo == '') {
+      return null;
+    }
+
+    // Si el valor no es válido, devuelve el error 'invalidPriority'
+    return { invalidPriority: true };
   };
 }
