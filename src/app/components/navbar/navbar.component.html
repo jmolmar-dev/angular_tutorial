@@ -9,23 +9,29 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" routerLink="/home">Inicio</a>
+              <li class="nav-item" *ngIf="!isAuthenticated">
+                <a class="nav-link" routerLink="/login">Login</a>
+              </li>
+              <li class="nav-item" *ngIf="!isAuthenticated">
+                <a class="nav-link" routerLink="/singin">Singin</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" routerLink="/tasks">Tareas</a>
+                <a class="nav-link" routerLink="/home"  *ngIf="isAuthenticated">Inicio</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+                <a class="nav-link" routerLink="/tasks"  *ngIf="isAuthenticated">Tareas</a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle"  routerLink="/dashboard" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle"  routerLink="/dashboard" role="button" data-bs-toggle="dropdown" aria-expanded="false"  *ngIf="isAuthenticated">
                   Dashboard
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" routerLink="/dashboard/stats">Stats</a></li>
-                  <li><a class="dropdown-item" routerLink="/dashboard/profile">Profile</a></li>
+                  <li><a class="dropdown-item" routerLink="/dashboard/stats"  *ngIf="isAuthenticated">Stats</a></li>
+                  <li><a class="dropdown-item" routerLink="/dashboard/profile"  *ngIf="isAuthenticated">Profile</a></li>
                 </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/login" *ngIf="isAuthenticated" (click)="onClick()">Sign Out</a>
               </li>
             </ul>
           </div>

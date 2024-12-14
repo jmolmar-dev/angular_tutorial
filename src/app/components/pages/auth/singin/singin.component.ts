@@ -29,7 +29,7 @@ export class SinginComponent {
       this.authService.register(this.formSingin.value)
       .then (response => {
         console.log(response)
-        this.router.navigate(['login']);
+        this.router.navigate(['/home']);
       })
       .catch (error => console.log(error))
     }

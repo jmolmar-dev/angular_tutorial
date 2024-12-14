@@ -31,7 +31,7 @@ export class LoginFormComponent {
     this.authService.login(this.formLogin.value)
     .then (response => {
       console.log(response)
-      this.router.navigate(['login']);
+      this.router.navigate(['/home']);
     })
     .catch (error => console.log(error))
   }
@@ -40,7 +40,7 @@ export class LoginFormComponent {
     this.authService.loginGoogle()
     .then (response => {
       console.log(response);
-      this.router.navigate(['login']);
+      this.router.navigate(['/home']);
     })
     .catch (error => console.log(error))
   }

@@ -12,15 +12,14 @@ import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 
 export const routes: Routes = [
     { path: 'login', component: LoginFormComponent },
-    { path: 'home', component: HomeComponent, ...canActivate(() => redirectUnauthorizedTo(['login'])) },
-    { path: 'tasks', component: TasksComponent, ...canActivate(() => redirectUnauthorizedTo(['login'])) },
-    { path: 'dashboard', component: DashboardComponent, ...canActivate(() => redirectUnauthorizedTo(['login'])),children: [
-        { path: 'stats', component: StatsComponent, ...canActivate(() => redirectUnauthorizedTo(['login'])) },
-        { path: 'profile', component: ProfileComponent, ...canActivate(() => redirectUnauthorizedTo(['login'])) }
+    { path: 'home', component: HomeComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
+    { path: 'tasks', component: TasksComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
+    { path: 'dashboard', component: DashboardComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])), children: [
+        { path: 'stats', component: StatsComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
+        { path: 'profile', component: ProfileComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) }
     ] },
-    { path: 'taskedit/:id', component: TaskformComponent, ...canActivate(() => redirectUnauthorizedTo(['login'])) },
+    { path: 'taskedit/:id', component: TaskformComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
     { path: 'singin', component: SinginComponent },
-    { path: 'notfound', component: NotfoundComponent },
-    {path:'',redirectTo:'login',pathMatch:'full'},
-    {path:'**',redirectTo:'login',pathMatch:'full'}
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
+    { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];
