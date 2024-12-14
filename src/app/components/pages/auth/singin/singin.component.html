@@ -1,0 +1,29 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form [formGroup]="formSingin" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="email">Dirección de Correo:</label>
+                    <input type="email" class="form-control" formControlName="email" id="email"
+                        [ngClass]="{'is-invalid': formSingin.get('email')?.invalid, 'is-valid': formSingin.get('email')?.valid}">
+                    <div class="invalid-feedback">
+                        <small *ngIf="formSingin.get('email')?.errors?.['required']">Debe de introducir una direccion de email</small>
+                        <small *ngIf="formSingin.get('email')?.errors?.['email']">El formato del correo introducido no es válido</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" class="form-control" formControlName="password" id="password"
+                        [ngClass]="{'is-invalid': formSingin.get('password')?.invalid, 'is-valid': formSingin.get('password')?.valid}">
+                    <div class="invalid-feedback">
+                        <small *ngIf="formSingin.get('password')?.errors?.['required']">Lo sentimos, pero no ha introducido una contraseña</small>
+                        <small *ngIf="formSingin.get('password')?.errors?.['invalidPassword']">La contraseña no cummple con los requisitos mínimos</small>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>
