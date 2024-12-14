@@ -4,6 +4,9 @@ import { customPasswordValidator } from './login.validator';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from '../../../footer/footer.component';
 import { NavbarComponent } from '../../../navbar/navbar.component';
+import { AuthService } from '../../../../services/auth.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -14,9 +17,10 @@ import { NavbarComponent } from '../../../navbar/navbar.component';
 })
 
 export class LoginFormComponent {
+  
   formLogin: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private authService : AuthService, private router : Router) {
     this.formLogin = this.fb.group({
       'email': ['', [Validators.required, Validators.email]],
       'password': ['', [Validators.required, customPasswordValidator()]]
@@ -24,10 +28,22 @@ export class LoginFormComponent {
   }
  
   onSubmit() {
-    if (this.formLogin.valid) {
-      console.log('Formulario válido:', this.formLogin.value);
-    } else {
-      console.log('Formulario inválido:', this.formLogin.errors);
-    }
+    this.authService.login(this.formLogin.value)
+    .then (response => {
+      console.log(response)
+      this.router.navigate(['login']);
+    })
+    .catch (error => console.log(error))
   }
+
+  onClick(){
+    this.authService.loginGoogle()
+    .then (response => {
+      console.log(response);
+      this.router.navigate(['login']);
+    })
+    .catch (error => console.log(error))
+  }
+
+
 }

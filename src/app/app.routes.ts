@@ -8,20 +8,19 @@ import { StatsComponent } from './components/dashboard/stats/stats.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SinginComponent } from './components/pages/auth/singin/singin.component';
 import { LoginFormComponent } from './components/pages/auth/login/login.component';
+import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 
 export const routes: Routes = [
-    {path: 'home', component : HomeComponent},
-    {path: 'tasks', component : TasksComponent},
-    {path: 'dashboard', component : DashboardComponent, children: [
-        {path: 'stats', component : StatsComponent },
-        {path: 'profile', component : ProfileComponent}
-    ]},
-    {path: 'taskedit/:id', component : TaskformComponent},
-    {path: 'login', component : LoginFormComponent},
-    {path: 'singin', component: SinginComponent},
-    {path: 'notfound', component : NotfoundComponent},
-    {path: '', redirectTo:'/home',pathMatch:'full'},
-    {path: '**', redirectTo: '/notfound', pathMatch: 'full'},
-    
+    { path: 'login', component: LoginFormComponent },
+    { path: 'home', component: HomeComponent, ...canActivate(() => redirectUnauthorizedTo(['login'])) },
+    { path: 'tasks', component: TasksComponent, ...canActivate(() => redirectUnauthorizedTo(['login'])) },
+    { path: 'dashboard', component: DashboardComponent, ...canActivate(() => redirectUnauthorizedTo(['login'])),children: [
+        { path: 'stats', component: StatsComponent, ...canActivate(() => redirectUnauthorizedTo(['login'])) },
+        { path: 'profile', component: ProfileComponent, ...canActivate(() => redirectUnauthorizedTo(['login'])) }
+    ] },
+    { path: 'taskedit/:id', component: TaskformComponent, ...canActivate(() => redirectUnauthorizedTo(['login'])) },
+    { path: 'singin', component: SinginComponent },
+    { path: 'notfound', component: NotfoundComponent },
+    {path:'',redirectTo:'login',pathMatch:'full'},
+    {path:'**',redirectTo:'login',pathMatch:'full'}
 ];
-

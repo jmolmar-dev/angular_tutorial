@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { customPasswordValidator } from './singin.validator';
 import { NavbarComponent } from "../../../navbar/navbar.component";
 import { FooterComponent } from "../../../footer/footer.component";
+import { AuthService } from '../../../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-singin',
@@ -16,7 +18,7 @@ export class SinginComponent {
 
     formSingin : FormGroup;
 
-    constructor (private fb : FormBuilder){
+    constructor (private fb : FormBuilder, private authService : AuthService, private router : Router){
       this.formSingin = this.fb.group ({
         'email': ['', [Validators.required, Validators.email]],
         'password': ['', [Validators.required, customPasswordValidator()]]
@@ -24,10 +26,11 @@ export class SinginComponent {
     }
 
     onSubmit() {
-      if (this.formSingin.valid) {
-        console.log('Formulario válido:', this.formSingin.value);
-      } else {
-        console.log('Formulario inválido:', this.formSingin.errors);
-      }
+      this.authService.register(this.formSingin.value)
+      .then (response => {
+        console.log(response)
+        this.router.navigate(['login']);
+      })
+      .catch (error => console.log(error))
     }
 }
