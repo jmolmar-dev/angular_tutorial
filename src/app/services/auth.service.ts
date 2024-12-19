@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from '@angular/fire/auth';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  isAuthenticated = false;
+  
 
   constructor(private auth: Auth) {
-    auth.onAuthStateChanged(user => {
-      this.isAuthenticated = !!user;
-    });
-  }
+    
+    }
+  
 
   register({ email, password }: any) {
     return createUserWithEmailAndPassword(this.auth, email, password);
@@ -28,4 +28,21 @@ export class AuthService {
   logout() {
     return signOut(this.auth);
   }
+
+  isAuthenticated(): Observable<boolean> {
+    return new Observable((observer) => {
+      onAuthStateChanged(
+        this.auth,
+        (user) => {
+          observer.next(!!user); // true si hay usuario, false si no
+          observer.complete();
+        },
+        (error) => {
+          observer.error(error);
+        }
+      );
+    });
+  }
+
+
 }

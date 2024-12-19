@@ -16,7 +16,9 @@ export class NavbarComponent {
   constructor(private authService: AuthService, private router : Router) {}
 
   ngOnInit() {
-    this.isAuthenticated = this.authService.isAuthenticated;
+    this.authService.isAuthenticated().subscribe ((authenticated => {
+      this.isAuthenticated = authenticated;
+    }))
   }
 
   onClick() {
