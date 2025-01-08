@@ -9,7 +9,7 @@ import { TaskEvent } from "../../../../models/taskevent.model";
 @Component({
   selector: 'app-tasklist',
   standalone: true,
-  imports: [CommonModule, TaskformComponent, ResumeComponent],
+  imports: [CommonModule, ResumeComponent],
   templateUrl: './tasklist.component.html',
   styleUrls: ['./tasklist.component.css']
 })
@@ -21,7 +21,15 @@ export class TasklistComponent implements OnInit {
   constructor(private taskService: TaskService) {}
 
   ngOnInit(): void {
-    this.taskList = this.taskService.getTasks();
+    this.taskService.getAllTasks().subscribe({
+      next: (tasks: Task[]) => {
+        this.taskList = tasks;
+        console.log('Tareas cargadas:', this.taskList);
+      },
+      error: (error) => {
+        console.error('Error al cargar las tareas:', error);
+      }
+    });
   }
 
   newTask(task: Task): void {

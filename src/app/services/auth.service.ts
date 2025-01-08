@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, User } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -42,6 +42,13 @@ export class AuthService {
         }
       );
     });
+  }
+
+  /**
+   * Metodo que nos devuelve el usuario actual logueado en el sistema
+   */
+  getCurrentUser(): User | null {
+    return this.auth.currentUser;  
   }
 
 

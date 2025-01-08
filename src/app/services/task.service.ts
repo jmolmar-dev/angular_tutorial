@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Task,TaskPriority,TaskStatus } from '../../models/task.model';
 import { TaskEvent } from '../../models/taskevent.model';
+import { Observable } from 'rxjs';
+import {Database, listVal, ref} from '@angular/fire/database';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +22,14 @@ export class TaskService {
     new Task(10, "Despliegue en Produccion", "Realizacion del despliegue de la aplicacion", TaskPriority.HIGH, TaskStatus.COMPLETED, new Date("2024-09-23"), new Date("2024-11-17"), true)
   ];
 
-  constructor() { }
+  constructor(private database : Database) { }
+
+    /*BBDD --> Lo usamos ahora posteriormente en TaskList*/
+    getAllTasks(){
+      const taskReference = ref (this.database, "/tasks");
+      return listVal (taskReference) as Observable <Task[]>;
+    }
+    /*--------------------------------------------------*/
 
   getTasks(): Task[] {
     return this.taskList;
@@ -42,6 +51,7 @@ export class TaskService {
   }
 
   taskToEdit: Task | null = null;
+  
   setTaskToEdit(task: Task | null): void {
     this.taskToEdit = task; 
   }
